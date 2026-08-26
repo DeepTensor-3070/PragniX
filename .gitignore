@@ -1,0 +1,273 @@
+.env
+.env.*
+!.env.example
+!.env.template
+
+*.pem
+*.key
+*.crt
+secrets/
+credentials/
+secrets.json
+credentials.json
+
+
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Python compiled extensions
+*.so
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+backend/.venv/
+backend/venv/
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Python tooling
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pyre/
+
+# Ruff
+.ruff_cache/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Local Python config
+.python-version
+
+
+
+# Ignore local uv cache
+.uv/
+
+
+
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+build/
+out/
+
+# Vite
+.vite/
+
+# Next.js (if ever used)
+.next/
+.nuxt/
+
+# Parcel
+.parcel-cache/
+
+# Turborepo
+.turbo/
+
+# TypeScript
+*.tsbuildinfo
+
+# npm
+.npm/
+
+# Yarn
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+.pnp.*
+.yarn-integrity
+
+# pnpm
+.pnpm-debug.log
+pnpm-lock.yaml
+
+
+
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+uvicorn.log
+
+
+
+# Local databases
+*.db
+*.sqlite
+*.sqlite3
+
+# PostgreSQL local dumps
+*.dump
+*.sql.gz
+
+
+
+*.pkl
+*.pickle
+*.joblib
+*.h5
+*.hdf5
+*.pt
+*.pth
+*.onnx
+*.bin
+*.safetensors
+
+# ML experiment outputs
+mlruns/
+wandb/
+runs/
+checkpoints/
+tensorboard/
+outputs/
+
+# Large datasets
+*.parquet
+*.feather
+*.hdf5
+*.npz
+*.npy
+
+# Local ML data
+backend/data/raw/*
+backend/data/processed/*
+
+# Keep documentation / directory structure
+!backend/data/raw/README.md
+!backend/data/processed/README.md
+
+# ML artifacts documentation
+!backend/ml/artifacts/README.md
+
+
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# Temporary datasets
+*.tmp
+*.temp
+
+coverage/
+.nyc_output/
+playwright-report/
+test-results/
+.vitest/
+.storybook/
+
+
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+!.vscode/tasks.json
+!.vscode/launch.json
+
+
+.idea/
+*.iml
+*.iws
+*.ipr
+
+*.swp
+*.swo
+*~
+*.bak
+*.tmp
+
+
+
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+
+
+
+docker-compose.override.yml
+
+# Docker local environment
+.docker/
+
+
+tmp/
+temp/
+.cache/
+.cache-loader/
+
+*.tmp
+*.temp
+
+# Generated files
+generated/
+artifacts/
+
+
+.postman/
+*.har
+
+
+
+# Local Vite environment files
+frontend/.env
+frontend/.env.local
+frontend/.env.development.local
+frontend/.env.test.local
+frontend/.env.production.local
+
+!frontend/.env.example
+
+backend/.env
+backend/.env.local
+backend/.env.development
+backend/.env.production
+
+# Keep example
+!backend/.env.example
+
+
+*.pdf
+*.xlsx
+*.csv
+
+
+*.pid
+*.seed
+*.pid.lock
+
+# Local caches
+.cache/
+.local/
+
+# Backup files
+*.orig
+*.rej

@@ -1,0 +1,59 @@
+# Web API
+fastapi
+uvicorn[standard]
+python-multipart
+httpx
+
+# Validation & Configuration
+pydantic
+pydantic-settings
+python-dotenv
+
+# Database
+sqlalchemy
+psycopg[binary]
+alembic
+
+# Data Processing
+numpy
+pandas
+scipy
+
+# Machine Learning & Forecasting
+scikit-learn
+statsmodels
+xgboost
+lightgbm
+
+# Model Serialization
+joblib
+
+# Explainable AI
+shap
+
+# Optimization
+ortools
+
+# Geospatial / Route Calculations
+geopy
+shapely
+
+# Market Research Agent
+beautifulsoup4
+trafilatura
+feedparser
+
+# AI / Ops Assistant
+openai
+
+# Caching / Background Jobs
+redis
+celery
+
+# Testing
+pytest
+pytest-asyncio
+pytest-cov
+
+# Development / Code Quality
+ruff

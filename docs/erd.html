@@ -1,0 +1,154 @@
+<style>
+#erd svg.erDiagram .divider path { stroke-opacity: 0.5; }
+#erd svg.erDiagram .row-rect-odd path,
+#erd svg.erDiagram .row-rect-odd rect,
+#erd svg.erDiagram .row-rect-even path,
+#erd svg.erDiagram .row-rect-even rect { stroke: none !important; }
+</style>
+<div id="erd"></div>
+<script type="module">
+import mermaid from 'https://esm.sh/mermaid@11/dist/mermaid.esm.min.mjs';
+const themeMode = document.documentElement.dataset.mode;
+const dark = themeMode ? themeMode === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+await document.fonts.ready;
+mermaid.initialize({
+  startOnLoad: false,
+  theme: 'base',
+  fontFamily: '"anthropic-sans", sans-serif',
+  themeVariables: {
+    darkMode: dark,
+    fontSize: '13px',
+    fontFamily: '"anthropic-sans", sans-serif',
+    lineColor: dark ? '#9c9a92' : '#73726c',
+    textColor: dark ? '#c2c0b6' : '#3d3d3a',
+  },
+});
+const def = `erDiagram
+  COMMODITIES ||--o{ COMMODITY_PRICES : has
+  PORTS ||--o{ PORT_CONGESTION : reports
+  PORTS ||--o{ ROUTES : origin_of
+  PORTS ||--o{ ROUTES : destination_of
+  REGIONS ||--o{ WEATHER_OBSERVATIONS : has
+  REGIONS ||--o{ BUNKER_PRICES : has
+  VESSEL_TYPES ||--o{ FREIGHT_RATES : used_in
+  ROUTES ||--o{ FREIGHT_RATES : rated_on
+
+  COMMODITIES {
+    int commodity_id PK
+    string name
+    string description
+  }
+  COMMODITY_PRICES {
+    int price_id PK
+    int commodity_id FK
+    date date
+    float price
+    string currency
+    string region
+    float demand_index
+    string source
+  }
+  PORTS {
+    int port_id PK
+    string port_name
+    string country
+    float latitude
+    float longitude
+    float max_draft
+    int max_loa
+    int max_beam
+    int berth_count
+    int cargo_handling_rate
+    int storage_capacity
+    int turnaround_time
+  }
+  PORT_CONGESTION {
+    int congestion_id PK
+    int port_id FK
+    datetime timestamp
+    string congestion_level
+    int vessel_waiting
+    float average_wait_hours
+    float berth_utilization
+  }
+  REGIONS {
+    int region_id PK
+    string name
+    string country
+    float latitude
+    float longitude
+  }
+  WEATHER_OBSERVATIONS {
+    int weather_id PK
+    int region_id FK
+    date date
+    float wind
+    float wave
+    boolean storm
+    boolean cyclone
+    string weather_risk
+  }
+  BUNKER_PRICES {
+    int bunker_price_id PK
+    int region_id FK
+    date date
+    string fuel_type
+    float price_usd_ton
+  }
+  VESSEL_TYPES {
+    int vessel_type_id PK
+    string vessel_type
+    int deadweight_tons
+    int cargo_capacity
+    int loa
+    int beam
+    float draft
+    float speed
+    float fuel_consumption
+  }
+  ROUTES {
+    int route_id PK
+    int origin_port_id FK
+    int destination_port_id FK
+    float distance_nm
+    int transit_days
+    string route
+  }
+  FREIGHT_RATES {
+    int freight_rate_id PK
+    int vessel_type_id FK
+    int route_id FK
+    date observation_date
+    float freight_rate
+    string currency
+    string unit
+    string source
+    boolean is_benchmark
+  }`;
+const { svg } = await mermaid.render('erd-svg', def);
+document.getElementById('erd').innerHTML = svg;
+
+document.querySelectorAll('#erd svg.erDiagram .node').forEach(node => {
+  const firstPath = node.querySelector('path[d]');
+  if (!firstPath) return;
+  const d = firstPath.getAttribute('d');
+  const nums = d.match(/-?[\d.]+/g)?.map(Number);
+  if (!nums || nums.length < 8) return;
+  const xs = [nums[0], nums[2], nums[4], nums[6]];
+  const ys = [nums[1], nums[3], nums[5], nums[7]];
+  const x = Math.min(...xs), y = Math.min(...ys);
+  const w = Math.max(...xs) - x, h = Math.max(...ys) - y;
+  const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+  rect.setAttribute('x', x); rect.setAttribute('y', y);
+  rect.setAttribute('width', w); rect.setAttribute('height', h);
+  rect.setAttribute('rx', '8');
+  for (const a of ['fill', 'stroke', 'stroke-width', 'class', 'style']) {
+    if (firstPath.hasAttribute(a)) rect.setAttribute(a, firstPath.getAttribute(a));
+  }
+  firstPath.replaceWith(rect);
+});
+
+document.querySelectorAll('#erd svg.erDiagram .row-rect-odd path, #erd svg.erDiagram .row-rect-even path').forEach(p => {
+  p.setAttribute('stroke', 'none');
+});
+</script>
